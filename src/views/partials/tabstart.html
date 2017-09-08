@@ -1,0 +1,27 @@
+<div class="row top-buffer"></div>
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="row">
+        <h2>Start Your Tab!</h2>
+    </div>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+    <h3>Location:</h3>
+    <div class="row">
+        <div id="map-container">
+            <div id="map-canvas"></div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="row">
+        <form>
+            <h3>Verify Location:</h3>
+            <formly-form model="vm.bartabAddress" fields="vm.bartabAddressFields" form="vm.bartabAddressForm">
+                <button type="submit" class="btn btn-primary" ng-disabled="vm.bartabAddressForm.$invalid">Set Location</button>
+            </formly-form>
+        </form>
+    </div>
+</div>

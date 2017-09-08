@@ -1,0 +1,44 @@
+{
+  "name": "bartab-webapp",
+  "description": "BarTab Webapp",
+  "main": "app.js",
+  "authors": [
+    "Nick Gregory"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "angular": "^1.6.6",
+    "angular-route": "^1.6.6",
+    "angular-resource": "^1.6.6",
+    "angular-cookies": "^1.6.6",
+    "api-check": "^7.5.5",
+    "angular-formly": "^8.4.1",
+    "angular-formly-templates-bootstrap": "^6.3.2"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.min.css",
+        "less/bootstrap.less"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "css/font-awesome.min.css",
+        "scss/font-awesome.scss"
+      ]
+    }
+  }
+}
