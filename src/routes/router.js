@@ -2,9 +2,9 @@ var path = require('path');
 
 module.exports = function (app, passport) {
 
-    // app.get('*', function (req, res) {
-    //     res.render(path.join('../views/index'));
-    // });
+    app.get('*', function (req, res) {
+        res.render(path.join('../views/index'));
+    });
 
     app.get('/', function (req, res) {
         res.render('index.ejs', {message: req.flash('loginMessage')});
