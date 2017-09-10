@@ -1,0 +1,33 @@
+<div class="col-md-6 col-md-offset-3">
+    <div class="row top-buffer"></div>
+    <div class="row" ng-if = "!vm.userSelected && !vm.barSelected">
+        <h3>Are you a User or a Bar initiating a tab?</h3>
+    </div>
+    <div class="btn-group" data-toggle="buttons">
+        <button type="button" ng-click="vm.typeSelection('user')" value="User"> User</button>
+        <button type="button" ng-click="vm.typeSelection('bar')" value="Bar"> Bar</button>
+    </div>
+    <div ng-if="vm.userSelected">
+        <div class="row">
+            <h2>Your unique Pin is: <strong>{{ vm.uniquePin }}</strong></h2>
+        </div>
+        <form ng-submit="vm.submitTransaction()" method="post">
+            <formly-form model="vm.tabStartInfo" fields="vm.tabStartFields" form="vm.tabStartForm">
+                <button type="submit" class="btn btn-primary" ng-disabled="vm.tabStartForm.$invalid">Submit Tab
+                    Request
+                </button>
+            </formly-form>
+        </form>
+    </div>
+
+    <div ng-if="vm.barSelected">
+        <form ng-submit="vm.requestTransaction()" method="post">
+            <formly-form model="vm.tabStartBarInfo" fields="vm.tabStartBarFields" form="vm.tabStartBarForm">
+                <button type="submit" class="btn btn-primary" ng-disabled="vm.tabStartBarForm.$invalid"> Find Tab
+                </button> <div id="loader" ng-if = 'vm.dataLoading'></div>
+            </formly-form>
+        </form>
+    </div>
+
+</div>
+

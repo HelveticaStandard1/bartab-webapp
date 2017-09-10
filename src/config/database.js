@@ -1,5 +1,5 @@
 module.exports = {
 
-    'url' : 'mongodb://localhost/db_name'
+    'url' : 'mongodb://btwa:btwa@ds127564.mlab.com:27564/bartab_db'
 
 };

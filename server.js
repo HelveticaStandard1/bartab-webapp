@@ -30,9 +30,9 @@ app.use(cookieParser());
 app.use(bodyParser());
 
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/src/views');
+app.set('views', [__dirname + '/src/views', __dirname + '/src/views/partials']);
 
-app.use(session({secret: 'ilovescotchscotchyscotchscotch'}));
+app.use(session({secret: 'thisisasecretphrasemwahahahaha'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -43,6 +43,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+require('./src/routes/transactionRouter')(app);
 require('./src/routes/router.js')(app, passport);
 require('./src/config/passport')(passport);
 

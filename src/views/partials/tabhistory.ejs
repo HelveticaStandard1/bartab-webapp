@@ -1,0 +1,43 @@
+<div class="row top-buffer"></div>
+
+<div class="row">
+    <div id="loader" ng-if = '!vm.dataLoading'></div>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="row">
+        <table class="table table-bordered table-striped" ng-if="vm.dataLoading">
+
+            <thead>
+            <tr>
+                <td>
+                    PIN
+                </td>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Location
+                </td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    Status
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.data">
+                <td> {{ item.pin }}</td>
+                <td> {{ item.createdAt }}</td>
+                <td> {{ item.pubName }}</td>
+                <td> {{ item.price }}</td>
+                <td> {{ item.status }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

@@ -5,10 +5,12 @@
         .module('app')
         .controller('RegisterController', RegisterController);
 
-    function RegisterController(UserService, $location, $rootScope, FlashService, RegisterService) {
+    RegisterController.$inject = ['RegistrationService']
+
+    function RegisterController(RegistrationService) {
         var vm = this;
 
-        vm.register = {};
+        vm.registerInfo = {};
 
         vm.registerFields = [
             {
@@ -32,18 +34,11 @@
             }];
 
         vm.register = function() {
-            vm.dataLoading = true;
-            RegisterService.save(vm.user, function() {
-                    vm.dataLoading = false;
-                    FlashService.Success('Successfully Registered!', true);
-                    $location.path('/login');
-                },
-                function() {
-                    vm.dataLoading = false;
-                    FlashService.Error('Error occurred.  Please try again!', true);
-
-                });
-        }
+            RegistrationService.register({
+                email: vm.registerInfo.email,
+                password: vm.registerInfo.password
+            });
+        };
     }
 
 })();

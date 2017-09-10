@@ -30,11 +30,16 @@
         <script src="/js/services/authentication.service.js"></script>
         <script src="/js/services/flash.service.js"></script>
         <script src="/js/services/registration.service.js"></script>
-        <script src="/js/services/user.service.js"></script>
+        <script src="/js/services/transaction.service.js"></script>
+        <script src="/js/services/local.service.js"></script>
         <script src="/js/controllers/login.controller.js"></script>
         <script src="/js/controllers/map.controller.js"></script>
         <script src="/js/controllers/profile.controller.js"></script>
         <script src="/js/controllers/register.controller.js"></script>
+        <script src="/js/controllers/home.controller.js"></script>
+        <script src="/js/controllers/tabstart.controller.js"></script>
+        <script src="/js/controllers/tabhistory.controller.js"></script>
+        <script src="/js/controllers/tabdeetz.controller.js"></script>
         <!--endinject-->
         <!--inject:css-->
         <link rel="stylesheet" href="/css/styles.css">
@@ -66,6 +71,9 @@
         <li>
           <a href="/tabstart">Start Tab</a>
         </li>
+      <li>
+          <a href="/tabhistory">Tab History</a>
+      </li>
         <li>
           <a href="/about">About</a>
         </li>
@@ -92,24 +100,10 @@
           <p class="lead"></p>
         </h1>
       </div>
-      <div class="col-md-5">
-        <div class="well well-lg"> 
-          <div class="row">
-            <div class="col-sm-12">
-              
-			
-            </div>
-          </div>
-        </div>
-      </div>
     </div> 
   </div><!-- /cont -->
   
 </div>
-
-<% if (message.length > 0) { %>
-<div class="alert alert-danger"><%= message %></div>
-<% } %>
 
 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 <ng-view></ng-view>

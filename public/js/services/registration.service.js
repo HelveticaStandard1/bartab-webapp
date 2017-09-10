@@ -1,10 +1,25 @@
 (function () {
+    'use strict';
+    angular
+        .module('app')
+        .factory('RegistrationService', RegistrationService);
 
-    var app = angular.module('app');
+    RegistrationService.$inject = ['$http', '$rootScope', '$location', '$window', '$cookies'];
 
-    app.factory('RegisterService', function ($resource) {
-        return $resource('/register');
-    });
+    function RegistrationService($http, $rootScope, $location, $window, $cookies) {
 
+        return {
+            register: function (user) {
+                return $http.post('/api/register', user)
+                    .then(function success(response) {
+                        $cookies.put('user', response);
+                        $location.path('/home');
+                        $window.alert('Registration Successful');
+                    }), function error(data) {
+                    $window.alert('Registration Failed');
+                };
+            }
+        };
+    }
 
 })();

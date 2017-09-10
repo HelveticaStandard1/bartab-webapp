@@ -5,12 +5,12 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
+    LoginController.$inject = ['AuthenticationService'];
 
-    function LoginController($location, AuthenticationService, FlashService) {
+    function LoginController(AuthenticationService) {
         var vm = this;
 
-        vm.login = {};
+        vm.loginInfo = {};
 
         vm.loginFields = [
             {
@@ -32,6 +32,13 @@
                     required: true
                 }
             }];
+
+        vm.login = function() {
+            AuthenticationService.login({
+                email: vm.loginInfo.email,
+                password: vm.loginInfo.password
+            });
+        };
     }
 
 })();

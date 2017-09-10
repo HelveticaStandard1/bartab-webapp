@@ -4,24 +4,39 @@
 
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
+            .when('/', {
+                templateUrl: 'partials/home.ejs',
+                controller: 'HomeController',
+                controllerAs: 'vm'
+            })
             .when('/login', {
                 templateUrl: '/partials/login.ejs',
                 controller: 'LoginController',
                 controllerAs: 'vm'
             })
             .when('/register', {
-                templateUrl: '/partials/register.html',
+                templateUrl: '/partials/register.ejs',
                 controller: 'RegisterController',
                 controllerAs: 'vm'
             })
             .when('/tabstart', {
-                templateUrl: '/partials/tabstart.html',
-                controller: 'MapController',
+                templateUrl: '/partials/tabstart.ejs',
+                controller: 'TabStartController',
                 controllerAs: 'vm'
             })
             .when('/profile', {
-                templateUrl: '/partials/profile.html',
+                templateUrl: '/partials/profile.ejs',
                 controller: 'ProfileController',
+                controllerAs: 'vm'
+            })
+            .when('/tabhistory',{
+                templateUrl: '/partials/tabhistory.ejs',
+                controller: 'TabHistoryController',
+                controllerAs: 'vm'
+            })
+            .when('/tabdeetz/pin/:pin',{
+                templateUrl: '/partials/tabdeetz.ejs',
+                controller: 'TabDeetzController',
                 controllerAs: 'vm'
             })
             .otherwise({redirectTo: '/'});
@@ -35,17 +50,17 @@
 
     function run($rootScope, $location, $cookies, $http) {
         // keep user logged in after page refresh
-        $rootScope.globals = $cookies.getObject('globals') || {};
-        if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+        $rootScope.user = $cookies.get('user') || {};
+        if ($rootScope.user) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.user;
         }
 
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        $rootScope.$on('$routeChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
             var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
-            var loggedIn = $rootScope.globals.currentUser;
+            var loggedIn = $rootScope.user;
             if (restrictedPage && !loggedIn) {
-                //$location.path('/login');
+                $location.path('/login');
             }
         });
     }
