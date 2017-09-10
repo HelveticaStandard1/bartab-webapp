@@ -12,7 +12,7 @@
             register: function (user) {
                 return $http.post('/api/register', user)
                     .then(function success(response) {
-                        $cookies.put('user', response);
+                        $cookies.put('user', JSON.stringify(response.data._id));
                         $location.path('/home');
                         $window.alert('Registration Successful');
                     }), function error(data) {
