@@ -3,7 +3,7 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
-var port = process.env.port || 5000;
+var port = process.env.PORT || 5000;
 var routes = express.Router();
 var mongoose = require('mongoose');
 var morgan = require('morgan');
