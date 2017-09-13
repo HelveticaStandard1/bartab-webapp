@@ -6,10 +6,8 @@ var transactionSchema = mongoose.Schema({
     user: String,
     createdAt: Date,
     updatedAt: Date,
-    card: {
-        cardNumber: String,
-        cardDate: String
-    },
+    total: String,
+    location: String,
     fullName: String,
     status: String
 

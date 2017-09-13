@@ -9,16 +9,30 @@
 
         return {
             createTab: function (transaction) {
-                return $http.post('/api/transaction', transaction)
-                    .then(function success(response) {
-                        $window.alert('Transaction Created Successfully!');
-                    }), function error(response) {
-                    $window.alert('Transaction creation failed');
-                };
+                return $http({
+                    url: '/api/transaction',
+                    method: 'POST',
+                    data: transaction
+                });
             },
 
             findAllTabs: function (userId) {
                 return $http.get('/api/transaction/' + userId);
+            },
+
+            getTransaction: function (userId, pin) {
+                return $http({
+                    url: '/api/transaction',
+                    method: 'GET',
+                    params: {user: userId, pin: pin}
+                });
+            },
+            linkTransactions: function (transaction) {
+                return $http({
+                    url: '/api/transaction',
+                    method: 'PUT',
+                    data: transaction
+                });
             }
         };
     }

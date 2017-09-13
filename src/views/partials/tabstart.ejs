@@ -21,7 +21,7 @@
     </div>
 
     <div ng-if="vm.barSelected">
-        <form ng-submit="vm.requestTransaction()" method="post">
+        <form ng-submit="vm.linkTransaction()" method="post">
             <formly-form model="vm.tabStartBarInfo" fields="vm.tabStartBarFields" form="vm.tabStartBarForm">
                 <button type="submit" class="btn btn-primary" ng-disabled="vm.tabStartBarForm.$invalid"> Find Tab
                 </button> <div id="loader" ng-if = 'vm.dataLoading'></div>

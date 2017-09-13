@@ -34,7 +34,7 @@
                 controller: 'TabHistoryController',
                 controllerAs: 'vm'
             })
-            .when('/tabdeetz/pin/:pin',{
+            .when('/tabdeetz',{
                 templateUrl: '/partials/tabdeetz.ejs',
                 controller: 'TabDeetzController',
                 controllerAs: 'vm'

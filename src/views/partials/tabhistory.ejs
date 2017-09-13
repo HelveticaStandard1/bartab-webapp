@@ -1,7 +1,7 @@
 <div class="row top-buffer"></div>
 
 <div class="row">
-    <div id="loader" ng-if = '!vm.dataLoading'></div>
+    <div id="loader" ng-if='!vm.dataLoading'></div>
 </div>
 
 <div class="col-md-6 col-md-offset-3">
@@ -29,15 +29,16 @@
             </thead>
             <tbody>
             <tr ng-repeat="item in vm.data">
-                <td> {{ item.pin }}</td>
+                <td>
+                    <a class="btn-link" href="/tabdeetz/?pin={{item.pin}}"> {{ item.pin }}</a>
+                </td>
                 <td> {{ item.createdAt }}</td>
-                <td> {{ item.pubName }}</td>
-                <td> {{ item.price }}</td>
+                <td> {{ item.location }}</td>
+                <td> {{ item.total | currency}}</td>
                 <td> {{ item.status }}</td>
             </tr>
             </tbody>
         </table>
     </div>
-
 
 </div>

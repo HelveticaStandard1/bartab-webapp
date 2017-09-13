@@ -34,6 +34,28 @@ module.exports = function (app) {
             });
     });
 
+    app.get('/api/transaction', function (req, res) {
+        var user = req.query.user;
+        var pin = req.query.pin;
+        Transaction.findOne({user: user, pin: pin}).exec()
+            .then(function (result) {
+                res.send(result);
+            });
+    });
+
+    app.put('/api/transaction', function (req, res) {
+        var pin = req.body.pin;
+        var location = req.body.location;
+        var status = req.body.status;
+
+        Transaction.findOneAndUpdate({pin: pin}, {location: location, status: status}, {new: true}).exec()
+            .then(function (result) {
+                res.send(result);
+            }, function (error) {
+                console.log(error);
+            });
+    });
+
     app.get('*', function (req, res) {
         res.render(path.join('../views/index'));
     });

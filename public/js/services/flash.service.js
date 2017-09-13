@@ -7,7 +7,6 @@
 
     FlashService.$inject = ['$rootScope'];
     function FlashService($rootScope) {
-        var localHostAddress = 'http://localhost:8081/simple-service-webapp/webapi';
         var service = {};
 
         service.Success = Success;

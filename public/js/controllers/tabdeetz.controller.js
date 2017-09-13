@@ -3,9 +3,9 @@
     angular.module('app')
         .controller('TabDeetzController', TabDeetzController);
 
-    TabDeetzController.$inject = ['$location', 'TransactionService', '$cookies'];
+    TabDeetzController.$inject = ['LocalService', '$location', 'TransactionService', '$cookies'];
 
-    function TabDeetzController($location, TransactionService, $cookies) {
+    function TabDeetzController(LocalService, $location, TransactionService, $cookies) {
 
         var vm = this;
 
@@ -17,8 +17,22 @@
             $location.path('/login');
         }
 
-        vm.deetz = $location.search('pin');
+        vm.deetz = $location.search();
 
+        function lookupTransaction() {
+            var user = LocalService.getUserCookie();
+            var deetz = vm.deetz.pin;
+            vm.dataLodading = true;
+            var promise = TransactionService.getTransaction(user, deetz);
+            promise.then(function (response) {
+                vm.data = response.data;
+                vm.dataLoading = false;
+            }, function (error) {
+                console.log(error);
+            });
+        }
+
+        lookupTransaction();
         console.log(vm.deetz);
     }
 

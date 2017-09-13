@@ -1,7 +1,35 @@
 <div class="col-md-6 col-md-offset-3">
 
     <div class="row">
-        <h2>Tab Details</h2>
+        <h2>Tab Details: </h2>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td> Pin Number:</td>
+                <td> {{ vm.data.pin }}</td>
+            </tr>
+            <tr>
+                <td> Created at:</td>
+                <td>{{ vm.data.createdAt }}</td>
+            <tr>
+                <td> Location:</td>
+                <td> {{ vm.data.location}}</td>
+            <tr>
+                <td> Total:</td>
+                <td> {{ vm.data.total | currency }}</td>
+            <tr>
+                <td> Current Status</td>
+                <td>{{ vm.data.status }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <a class="btn-link" href="/tabhistory">Tab History</a>
     </div>
 
 </div>
