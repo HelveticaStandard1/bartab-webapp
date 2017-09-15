@@ -23,7 +23,8 @@
     "angular-cookies": "^1.6.6",
     "api-check": "^7.5.5",
     "angular-formly": "^8.4.1",
-    "angular-formly-templates-bootstrap": "^6.3.2"
+    "angular-formly-templates-bootstrap": "^6.3.2",
+    "socket.io-client": "^2.0.3"
   },
   "overrides": {
     "bootstrap": {
@@ -39,6 +40,9 @@
         "css/font-awesome.min.css",
         "scss/font-awesome.scss"
       ]
+    },
+    "socket.io-client": {
+      "main": "dist/socket.io.js"
     }
   }
 }
