@@ -33,7 +33,7 @@
                 }
             }];
 
-        vm.login = function() {
+        vm.login = function () {
             AuthenticationService.login({
                 email: vm.loginInfo.email,
                 password: vm.loginInfo.password

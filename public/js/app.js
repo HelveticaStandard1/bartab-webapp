@@ -1,6 +1,6 @@
 (function () {
 
-    var app = angular.module('app', ['ngResource', 'ngRoute', 'ngCookies', 'formly', 'formlyBootstrap']);
+    var app = angular.module('app', ['ngResource', 'ngRoute', 'ngCookies', 'formly', 'formlyBootstrap', 'ngMaterial']);
 
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider

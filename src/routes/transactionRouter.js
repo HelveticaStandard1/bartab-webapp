@@ -1,7 +1,7 @@
 var Transaction = require('../models/transaction');
 var path = require('path');
 
-module.exports = function (app) {
+module.exports = function (app, io) {
 
     app.post('/api/transaction', function (req, res, next) {
 
@@ -13,6 +13,7 @@ module.exports = function (app) {
         transaction.updatedAt = Date.now();
         transaction.card = req.body.card;
         transaction.fullName = req.body.fullName;
+        transaction.patronClientId = req.body.patronClientId;
         transaction.status = 'New';
 
         transaction.save(function (error) {
@@ -43,13 +44,15 @@ module.exports = function (app) {
             });
     });
 
-    app.put('/api/transaction', function (req, res) {
-        var pin = req.body.pin;
-        var location = req.body.location;
-        var status = req.body.status;
+    app.put('/api/transaction/link', function (req, res) {
+        var pin = req.body.pin,
+            location = req.body.location,
+            status = req.body.status,
+            barClientId = req.body.barClientId;
 
-        Transaction.findOneAndUpdate({pin: pin}, {location: location, status: status}, {new: true}).exec()
+        Transaction.findOneAndUpdate({pin: pin}, {location: location, status: status, barClientId: barClientId}, {new: true}).exec()
             .then(function (result) {
+                io.to(result.patronClientId).emit('Link Request', result);
                 res.send(result);
             }, function (error) {
                 console.log(error);

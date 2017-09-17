@@ -29,7 +29,7 @@
             },
             linkTransactions: function (transaction) {
                 return $http({
-                    url: '/api/transaction',
+                    url: '/api/transaction/link',
                     method: 'PUT',
                     data: transaction
                 });

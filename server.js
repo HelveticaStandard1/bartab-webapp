@@ -1,18 +1,17 @@
-var express = require('express');
+/*jshint esversion: 6 */
 
-var cors = require('cors');
-var app = express();
-
-var port = process.env.PORT || 5000;
-var routes = express.Router();
-var mongoose = require('mongoose');
-var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var passport = require('passport');
-var flash = require('connect-flash');
-var path = require('path');
+var express = require('express'),
+    cors = require('cors'),
+    app = express(),
+    port = process.env.PORT || 5000,
+    mongoose = require('mongoose'),
+    morgan = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    session = require('express-session'),
+    passport = require('passport'),
+    flash = require('connect-flash'),
+    path = require('path');
 
 app.use(express.static('public'));
 app.use(express.static('src/views'));
@@ -37,37 +36,29 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.locals.successMessages = req.flash('success_messages');
     res.locals.errorMessages = req.flash('error_messages');
     next();
 });
 
-require('./src/routes/transactionRouter')(app);
-require('./src/routes/router.js')(app, passport);
-require('./src/config/passport')(passport);
-
 app.use(function (req, res, next) {
-    // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
-
-    // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
     next();
 });
 
 app.options('*', cors());
 
-app.listen(port, function (err) {
+var server = app.listen(port, function (err) {
     console.log('running server on port ' + port);
 });
 
+var io = require('socket.io').listen(server);
+
+require('./src/routes/socket')(io);
+require('./src/routes/transactionRouter')(app, io);
+require('./src/routes/router.js')(app, passport);
+require('./src/config/passport')(passport);

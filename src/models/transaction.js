@@ -8,8 +8,9 @@ var transactionSchema = mongoose.Schema({
     updatedAt: Date,
     total: String,
     location: String,
-    fullName: String,
-    status: String
+    status: String,
+    barClientId: String,
+    patronClientId: String
 
 });
 

@@ -26,16 +26,16 @@ footer {
 
 
 #masthead {
-  min-height:199px;
+  min-height:125px;
   background-color:#000044;
   color:#aaaacc;
 }
 
 #masthead h1 {
-  font-size: 55px;
+  font-size: 50px;
   line-height: 1;
   color:#fefeff;
-  margin-top:50px;
+  margin-top:25px;
 }
 
 #masthead .well {

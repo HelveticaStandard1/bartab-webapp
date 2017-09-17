@@ -1,33 +1,78 @@
 <div class="col-md-6 col-md-offset-3">
     <div class="row top-buffer"></div>
-    <div class="row" ng-if = "!vm.userSelected && !vm.barSelected">
-        <h3>Are you a User or a Bar initiating a tab?</h3>
+    <div class="row" ng-if="!vm.userSelected && !vm.barSelected">
+        <p class="inset">
+            Are you a User or a Bar initiating a tab?  Select the option for you!
+        </p>
     </div>
-    <div class="btn-group" data-toggle="buttons">
-        <button type="button" ng-click="vm.typeSelection('user')" value="User"> User</button>
-        <button type="button" ng-click="vm.typeSelection('bar')" value="Bar"> Bar</button>
-    </div>
-    <div ng-if="vm.userSelected">
-        <div class="row">
-            <h2>Your unique Pin is: <strong>{{ vm.uniquePin }}</strong></h2>
-        </div>
-        <form ng-submit="vm.submitTransaction()" method="post">
-            <formly-form model="vm.tabStartInfo" fields="vm.tabStartFields" form="vm.tabStartForm">
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.tabStartForm.$invalid">Submit Tab
-                    Request
-                </button>
-            </formly-form>
-        </form>
+    <div class="btn-group" layout="row" layout-wrap="" layout-margin="" layout-align="center">
+        <md-button class="md-primary md-raised" ng-click="vm.startUserTransaction($event)" value="User"> User
+        </md-button>
+        <md-button class="md-primary md-raised" ng-click="vm.typeSelection('bar')" value="Bar"> Bar</md-button>
     </div>
 
     <div ng-if="vm.barSelected">
         <form ng-submit="vm.linkTransaction()" method="post">
             <formly-form model="vm.tabStartBarInfo" fields="vm.tabStartBarFields" form="vm.tabStartBarForm">
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.tabStartBarForm.$invalid"> Find Tab
-                </button> <div id="loader" ng-if = 'vm.dataLoading'></div>
+                <md-button type="submit" class="md-primary md-raised" ng-disabled="vm.tabStartBarForm.$invalid"> Find
+                    Tab
+                </md-button>
+                <div id="loader" ng-if='vm.dataLoading'></div>
             </formly-form>
         </form>
     </div>
+
+    <script type="text/ng-template" id="startTab.tmpl.html">
+        <md-dialog aria-label="User Tab">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Patron Tab</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="dvm.cancel()">
+                        <md-icon md-svg-src="content/images/ic_close_black_24px.svg"
+                                 aria-label="Close dialog"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content style="min-width:400px;">
+                <md-tabs md-dynamic-height md-selected="dvm.data.selectedTab">
+                    <md-tab label="Submit" ng-disabled="dvm.data.firstLocked">
+                        <md-content class="md-padding">
+                            <p>Please tell the bartender your pin and hit Submit</p>
+                            <p>Your unique Pin: {{ dvm.pin }}</p>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Process" ng-disabled="dvm.data.secondLocked">
+                        <md-content class="md-padding">
+                            <div layour="row" layout-sm="column" layout-align="space-around">
+                                <h3>Waiting for response from Bar...</h3>
+                            </div>
+                            <div layout="row" layout-sm="column" layout-align="space-around">
+                                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Confirm" ng-disabled="dvm.data.thirdLocked">
+                        <md-content class="md-padding">
+                            <h3>{{ dvm.message }}</h3>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-dialog-content>
+            <md-dialog-actions ng-show="!dvm.data.transactionSubmitted">
+                <md-button type="submit" class="md-button md-raised" ng-click="dvm.submitRequest()">Submit
+                </md-button>
+            </md-dialog-actions>
+            <md-dialog-actions ng-show="dvm.data.transactionCompleted && !dvm.data.transactionSuccessful">
+                <md-button type="submit" class="md-button md-raised" ng-click="dvm.cancel()">Close
+                </md-button>
+            </md-dialog-actions>
+            <md-dialog-actions ng-show="dvm.data.transactionCompleted && dvm.data.transactionSuccessful">
+                <md-button type="submit" class="md-button md-raised" ng-click="dvm.viewTab()">Check It Out
+                </md-button>
+            </md-dialog-actions>
+        </md-dialog>
+    </script>
 
 </div>
 
